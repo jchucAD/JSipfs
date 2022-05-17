@@ -1,17 +1,21 @@
-const ipfs = require('ipfs')
-const node = new ipfs()
+const ipfs = require('ipfs-core')
+
 const fs = require('fs')
 const files = [
-  {
-    path: 'aDir/aFile',
-    content: fs.readFileSync('aDir/aFile')
-  }
+	{
+		path: 'aDir/aFile',
+		content: fs.readFileSync('aDir/aFile')
+	}
 ]
-node.on('ready', async () =>  {
-  	console.log('node ready');
+async function main() {
+	var node = await ipfs.create()
+	var version = await node.version()
+
+	console.log('node ready, version:', version)
 	node.files.add(files, function (err, files) {
-  	console.log(files)
+		console.log(files)
 	})
 
-	}
-)
+}
+
+main()

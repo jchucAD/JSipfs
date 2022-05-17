@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.js"></script>
+<script>
+	const validCID = 'QmcdVRsb78fq5UpWRCGaoLRfzz3FuXVZdrzJztKj3E4d8B';
+
+	async function main() {
+		var node = await window.Ipfs.create()
+		var version = await node.version()
+		console.log('node ready, version:', version)
+		node.get(validCID, function (err, files) {
+			files.forEach((file) => {
+				console.log(file)
+				var img = document.getElementById("imgTag");
+				img.src = "data:image/jpeg;base64," + btoa(String.fromCharCode.apply(null, file.content));
+
+			})
+		})
+	}
+	main()
+</script>
+
+<body>
+
+	<h1>IPFS Test photo JC</h1>
+	<img id="imgTag" src=''></img>
+
+
+</body>
+
+</html>

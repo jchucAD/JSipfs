@@ -1,10 +1,15 @@
-const ipfs = require('ipfs-core')
-const node = new ipfs()
+const ipfs = require('ipfs')
 
-node.on('ready', async () => {
-	console.log('node ready');
-	let content = node.types.Buffer.from('Hello from IPFS Session 3');
-	let results = await node.files.add(content);
-	let hash = results[0].hash;
-	console.log(hash);
-})
+async function main() {
+	var node = await ipfs.create()
+	var version = await node.version()
+
+	console.log('node ready, version:', version);
+	const content = node.Buffer.from('Hello from JC')
+	const results = await node.add(content)
+	const hash = results[0].hash
+	console.log(hash)
+
+	node.types.Buffer.from
+}
+main()

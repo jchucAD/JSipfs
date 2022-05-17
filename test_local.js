@@ -1,7 +1,8 @@
-const Ipfs = require('ipfs-core')
-const node = new Ipfs()
+const ipfs = require('ipfs-core')
 
-node.on('ready', () => {
+async function main() {
+  var node = await ipfs.create()
+
   console.log('node ready');
 
   // stopping a node
@@ -9,5 +10,7 @@ node.on('ready', () => {
     // node is now 'offline'
     console.log('node closed');
   })
-})
+}
+main();
+
 
